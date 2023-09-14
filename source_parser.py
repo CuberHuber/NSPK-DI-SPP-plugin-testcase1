@@ -3,14 +3,16 @@
 
 1/2 документ плагина
 """
+import datetime
 import logging
 import os
+import random
 import time
 
 from spp_document import SPP_document
 
 
-class SOURCE_PARSER_CLASS:
+class TESTParserCase1:
     """
     Класс парсера плагина SPP
 
@@ -22,7 +24,7 @@ class SOURCE_PARSER_CLASS:
 
     """
 
-    SOURCE_NAME = '<unique source name>'
+    SOURCE_NAME = 'test-source-1'
     _content_document: list[SPP_document]
 
     def __init__(self, *args, **kwargs):
@@ -59,18 +61,79 @@ class SOURCE_PARSER_CLASS:
         :rtype:
         """
         # HOST - это главная ссылка на источник, по которому будет "бегать" парсер
-        self.logger.debug(F"Parser enter to {HOST}")
+        self.logger.debug(F"Parser enter to {self.SOURCE_NAME}")
 
-        # ========================================
-        # Тут должен находится блок кода, отвечающий за парсинг конкретного источника
-        # -
 
-        # Логирование найденного документа
-        self.logger.info(self._find_document_text_for_logger(document))
+        doc = SPP_document(None, 'TestDocument1', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
 
-        # ---
-        # ========================================
-        ...
+        doc = SPP_document(None, 'TestDocument2', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument3', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument4', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument5', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument6', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument7', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument8', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument9', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument10', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument11', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument12', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument13', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
+        doc = SPP_document(None, 'TestDocument14', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+        self._content_document.append(doc)
+        self.logger.info(self._find_document_text_for_logger(doc))
+        time.sleep(0.5)
+
 
     @staticmethod
     def _find_document_text_for_logger(doc: SPP_document):
@@ -82,53 +145,3 @@ class SOURCE_PARSER_CLASS:
         :rtype:
         """
         return f"Find document | name: {doc.title} | link to web: {doc.web_link} | publication date: {doc.pub_date}"
-
-    @staticmethod
-    def some_necessary_method():
-        """
-        Если для парсинга нужен какой-то метод, то его нужно писать в классе.
-
-        Например: конвертация дат и времени, конвертация версий документов и т. д.
-        :return:
-        :rtype:
-        """
-        ...
-
-    @staticmethod
-    def nasty_download(driver, path: str, url: str) -> str:
-        """
-        Метод для "противных" источников. Для разных источника он может отличаться.
-        Но основной его задачей является:
-            доведение driver селениума до файла непосредственно.
-
-            Например: пройти куки, ввод форм и т. п.
-
-        Метод скачивает документ по пути, указанному в driver, и возвращает имя файла, который был сохранен
-        :param driver: WebInstallDriver, должен быть с настроенным местом скачивания
-        :_type driver: WebInstallDriver
-        :param url:
-        :_type url:
-        :return:
-        :rtype:
-        """
-
-        with driver:
-            driver.set_page_load_timeout(40)
-            driver.get(url=url)
-            time.sleep(1)
-
-            # ========================================
-            # Тут должен находится блок кода, отвечающий за конкретный источник
-            # -
-            # ---
-            # ========================================
-
-            # Ожидание полной загрузки файла
-            while not os.path.exists(path + '/' + url.split('/')[-1]):
-                time.sleep(1)
-
-            if os.path.isfile(path + '/' + url.split('/')[-1]):
-                # filename
-                return url.split('/')[-1]
-            else:
-                return ""
