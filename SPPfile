@@ -14,7 +14,7 @@ PARSER source_parser
 # Настройка задачи
 # SETENV <атрибут управления> [<параметры>, ...]
 # SETENV LogMode debug
-SET restart-interval 30 seconds
+SET restart-interval 240 seconds
 
 
 # Этот параметр нужен, если ты имеешь дело с противным источником.
