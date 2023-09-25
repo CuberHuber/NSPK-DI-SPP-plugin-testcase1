@@ -5,8 +5,6 @@
 """
 import datetime
 import logging
-import os
-import random
 import time
 
 from spp_document import SPP_document
@@ -63,77 +61,27 @@ class TESTParserCase1:
         # HOST - это главная ссылка на источник, по которому будет "бегать" парсер
         self.logger.debug(F"Parser enter to {self.SOURCE_NAME}")
 
+        self.find_new_doc('Document 1', datetime.datetime.strptime('01.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 2', datetime.datetime.strptime('03.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 3', datetime.datetime.strptime('05.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 4', datetime.datetime.strptime('07.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 5', datetime.datetime.strptime('09.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 6', datetime.datetime.strptime('10.02.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 7', datetime.datetime.strptime('01.04.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 8', datetime.datetime.strptime('03.04.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 9', datetime.datetime.strptime('05.04.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 10', datetime.datetime.strptime('07.04.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 11', datetime.datetime.strptime('09.04.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 12', datetime.datetime.strptime('01.06.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 13', datetime.datetime.strptime('03.06.2022', '%d.%m.%Y'))
+        self.find_new_doc('Document 14', datetime.datetime.strptime('05.06.2022', '%d.%m.%Y'))
 
-        doc = SPP_document(None, 'TestDocument1', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
+
+    def find_new_doc(self, filename: str, date: datetime.datetime = datetime.datetime.now(), delay: float = 0.5):
+        doc = SPP_document(None, filename, None, None, self.SOURCE_NAME, None, {}, date, None)
         self._content_document.append(doc)
         self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument2', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument3', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument4', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument5', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument6', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument7', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument8', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument9', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument10', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument11', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument12', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument13', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
-        doc = SPP_document(None, 'TestDocument14', None, None, self.SOURCE_NAME, None, {}, datetime.datetime.now(), None)
-        self._content_document.append(doc)
-        self.logger.info(self._find_document_text_for_logger(doc))
-        time.sleep(0.5)
-
+        time.sleep(delay)
 
     @staticmethod
     def _find_document_text_for_logger(doc: SPP_document):
