@@ -1,39 +1,53 @@
-# This plugin processes <File | Native | Another> source
-# Link: test-source-1
+# This plugin processes Native source
+# Link: testcase1.com
 # Author:
-#	Test Lupashko Roman
+#	Лупашко Роман Владимирович
 #	NSPK DI
 
-# указание уникального имени источника
-SOURCE test-source-1
+## ****************************************************
+#               Зона конфигурации плагина
 
-# Тут указывается имя файла с парсером
-# PARSER <название файла с парсером без расширения>
-PARSER source_parser
+REF test-source-1                       # Имя связанного объекта. Для парсера - это источник. Для ml - это модель, и т.д.
+TYPE PARSER
 
-# Настройка задачи
-# SETENV <атрибут управления> [<параметры>, ...]
-# SETENV LogMode debug
-SET restart-interval 240 seconds
+# Файлы, необходимые плагину
+FILE SPPfile
+FILE testcase1.py
+FILE LICENSE
 
-
-# Этот параметр нужен, если ты имеешь дело с противным источником.
-# BUS_ADD <название дополнительного потока> <объект / модуль / дополнительный модуль из класса парсера>
-# BUS_ADD s_download PARSER/SOURCE_PARSER_CLASS/nasty_download
-
-# Тут указывается класс парсера и метод, который платформа будет вызывать
-# START <название класса парсера> <метод, который должен вернуть список документов>
-START TESTParserCase1 content
+#
+## ****************************************************
 
 
-# Такая конфигурация модулей подходит для "файловых противных источников"
-# ADD <название модуля> [<опциональные параметры>, ...]
-#ADD FilterOnlyNewDocumentWithDB
-#ADD DownloadDocumentsThroughSeleniumTemp
-#ADD ExtractTextFromFile
-#ADD UploadDocumentToDB
 
-# Такая конфигурация модулей подходит для "Нативных источников"
+## ****************************************************
+#               Зона конфигурации задачи
+
+TYPE PARSER
+SET LogMode debug               # Уровень журналирования
+SET restart-interval 60 seconds     # Интервал перезапуска. Формат POSTGRE interval string
+
+#
+## ****************************************************
+
+
+
+## ****************************************************
+#               Зона конфигурации нагрузки
+
+PAYLOAD testcase1
+ENTRY TESTParserCase1 content                                         # content - entry point
+#
+## ****************************************************
+
+
+
+## ****************************************************
+#               Зона конфигурации постобработки
+
 ADD TimezoneSafeControl
 ADD FilterOnlyNewDocumentWithDB
 ADD UploadDocumentToDB
+
+#
+## ****************************************************
